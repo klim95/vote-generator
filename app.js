@@ -20,23 +20,48 @@ var spongebob = new photo ("Spongebob Squarepants", "img/spongebob.jpg");
 var tmnt = new photo ("Teenage Mutant Ninja Turtles", "img/tmnt.jpg");
 var tomjerry = new photo ("Tom \& Jerry", "img/tomjerry.jpg");
 
+var displayChoice1 = document.getElementById('choice1');
+var displayChoice2 = document.getElementById('choice2');
 
-var cartoon1 = function() {
-	var image1 = Math.floor(Math.random() * images.length);
-	console.log(images[image1]);
-	document.getElementById("choice1").src = images[image1].path;
-	document.getElementById("title1").src = images[image1].name;
+var tracker = {
+  choice1: 0,
+  choice2: 0,
+
+  calcRandNum: function() {
+    return Math.floor(Math.random() * images.length);
+  },
+
+  displayPhotos: function() {
+    this.choice1 = this.calcRandNum();
+    this.choice2 = this.calcRandNum();
+
+    while (this.choice1 === this.choice2) {
+      this.choice2 = this.calcRandNum();
+    };
+
+	var photo1 = images[this.choice1];
+	var photo2 = images[this.choice2];
+
+	displayChoice1.src = photo1.path;
+	displayChoice2.src = photo2.path;
+
+	displayChoice1.addEventListener('click', this.voteLeft);
+	displayChoice2.addEventListener('click', this.voteRight);
+  },
+
+  voteLeft: function() {
+    images[tracker.choice1].votes +=1;
+    tracker.displayPhotos();
+  },
+  voteRight: function() {
+    images[tracker.choice2].votes +=1;
+    tracker.displayPhotos();
+  },
 }
 
-var cartoon2 = function() {
-	var image2 = Math.floor(Math.random() * images.length);
-	console.log(images[image2]);
-	document.getElementById("choice2").src = images[image2].path;
-	document.getElementById("title2").src = images[image2].name;
-}
 
-cartoon1();
-cartoon2();
+tracker.displayPhotos();
+
 
 //displayChart in tracker
 
@@ -44,26 +69,20 @@ var displayChart = function() {
 
 var ctx = document.getElementById("myChart").getContext("2d");
 
-	var data = [
-    {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    }
-	]
+var data = [
+   {
+       value: images[tracker.choice2].votes,
+       color:"#F7464A",
+       highlight: "#FF5A5E",
+       label: "Red"
+   },
+   {
+       value: images[tracker.chioce2].votes,
+       color: "#46BFBD",
+       highlight: "#5AD3D1",
+       label: "Green"
+   },
+]
 
 var pieOptions = {
 	segmentShowStroke : false,
