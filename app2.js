@@ -69,3 +69,33 @@ var tracker = {
     }
   }
 }
+
+var displayChart = function() {
+
+var ctx = document.getElementById("myChart").getContext("2d");
+
+var data = [
+   {
+       value: images[tracker.choice2].votes,
+       color:"#F7464A",
+       highlight: "#FF5A5E",
+       label: "Red"
+   },
+   {
+       value: images[tracker.chioce2].votes,
+       color: "#46BFBD",
+       highlight: "#5AD3D1",
+       label: "Green"
+   },
+]
+
+var pieOptions = {
+	segmentShowStroke : false,
+	animateScale : true
+}
+
+var myPieChart = new Chart(ctx).Pie(data,pieOptions);
+
+}
+
+displayChart();
