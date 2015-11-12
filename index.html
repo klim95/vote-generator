@@ -6,25 +6,24 @@
 	<title></title>
 	<link rel= "stylesheet" type= "text/css" href="style.css">
 	<script src = "Chart.js"></script>
+
 </head>
 <body>
-	<header id="header" class="header">
-		<h1>Favorite Cartoons</h1>
-	</header>
-	<div>
-		<p id="title1"></p>
-		<img id="choice1">
-	</div>
-	<div>
-		<p id="title2"></p>
-		<img id="choice2">
-	<footer>
-		<h2>Footer</h2>
-	</footer>
+  <section id='main_content'>
+    
+    <figure class='items' id='leftPhotoDiv'>
+      <img id='leftPhoto'/>
+      <figcaption id='capLeft'>Left</figcaption>
+    </figure>
 
-	<canvas id="myChart" width="600" height="600"></canvas>
-<script type="text/javascript" src="app.js"></script>
+    <canvas class='items' id="voteChart" width="250" height="250"></canvas>
+    
+    <figure class='items' id='rightPhotoDiv'>
+      <img id='rightPhoto'/>
+      <figcaption id='capRight'>Right</figcaption>
+    </figure>
 
+  </section>
+	<script src="app2.js"></script>
 </body>
 </html>
-
