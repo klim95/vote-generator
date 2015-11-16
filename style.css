@@ -1,3 +1,18 @@
 h1 {
-	color: red;
+	color: black;
+	font-size:40px;
+	font-family: arial;
+	text-align: center;
+}
+
+body {
+	background-color: #f37735;
+}
+
+#main_content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
 }

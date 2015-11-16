@@ -13,7 +13,7 @@ var data = {
 }
 
 var images = [];
-var files = ['beavisbutthead','bobsburgers','familyguy','futurama','johnnybravo','kingofthehill','rocketpower','scoobydoo','simpsons','spongebob','tmnt','tomjerry'];
+var files = ['beavisbutthead', 'bobsburgers', 'familyguy', 'futurama', 'johnnybravo', 'kingofthehill', 'rocketpower', 'scoobydoo', 'simpsons', 'spongebob', 'tmnt', 'tomjerry'];
 
 function Photo(name, path) {
   this.name = name;
@@ -70,32 +70,22 @@ var tracker = {
   }
 }
 
-var displayChart = function() {
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx).Bar(data, {
+  scaleShowVerticalLines: false,
+  scaleShowHorizontalLines: true,
+  barStrokeWidth: 1
+});
 
-var ctx = document.getElementById("myChart").getContext("2d");
+var mainContent = document.getElementById('main_content');
+mainContent.addEventListener('click', function(event) {
+  if (event.target.id === tracker.left.name || event.target.id === tracker.right.name) {
+    tracker.vote(event.target.id);
+    tracker.getRandomImg();
+    chart.update();
+  } else {
+    console.log('Click the image');
+  }
+})
 
-var data = [
-   {
-       value: images[tracker.choice2].votes,
-       color:"#F7464A",
-       highlight: "#FF5A5E",
-       label: "Red"
-   },
-   {
-       value: images[tracker.chioce2].votes,
-       color: "#46BFBD",
-       highlight: "#5AD3D1",
-       label: "Green"
-   },
-]
-
-var pieOptions = {
-	segmentShowStroke : false,
-	animateScale : true
-}
-
-var myPieChart = new Chart(ctx).Pie(data,pieOptions);
-
-}
-
-displayChart();
+tracker.getRandomImg();
